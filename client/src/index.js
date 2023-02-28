@@ -1,0 +1,29 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import { BrowserRouter } from 'react-router-dom'
+import { CircularProgress, ThemeProvider } from '@mui/material'
+import { lightTheme } from './theme/theme'
+import { Provider } from 'react-redux'
+import { store, persistor } from './app/store'
+import { PersistGate } from 'redux-persist/integration/react'
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
+	<React.StrictMode>
+		<Provider store={store}>
+			<PersistGate loading={<CircularProgress />} persistor={persistor}>
+				<BrowserRouter>
+					<ThemeProvider theme={lightTheme}>
+						<App />
+					</ThemeProvider>
+				</BrowserRouter>
+			</PersistGate>
+		</Provider>
+	</React.StrictMode>
+)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
